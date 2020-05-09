@@ -15,7 +15,8 @@ class GameManager {
         this.currentPlayer = 0;
         this.playOrder = [];
         this.overList = [];
-        this.winner = 0;
+        this.winner = null;
+        this.lastAction = null;
         this.over = false;
     }
 
@@ -95,7 +96,7 @@ class GameManager {
     }
 
     action1({red = 0, blue = 0, white = 0, green = 0, black = 0}, userCurrencyNum) {
-        if (this.currency.red + this.currency.blue + this.currency.white + this.currency.green + this.currency.black < 3) {
+        if (this.currency.red + this.currency.blue + this.currency.white + this.currency.green + this.currency.black === 0) {
             return false;
         }
 
@@ -104,7 +105,7 @@ class GameManager {
             return false;
         }
 
-        if (total + userCurrencyNum > 10) {
+        if (total + userCurrencyNum >= 10) {
             return false;
         }
 
@@ -483,6 +484,10 @@ class GameManager {
         this.cardGroups.nobleCards.splice(index, 1);
 
         return card;
+    }
+
+    remember(uid, action, select) {
+        this.lastAction = {uid, action, select};
     }
 
     checkIsLastPlayer(uid) {

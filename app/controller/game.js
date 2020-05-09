@@ -109,6 +109,8 @@ class GameController extends Controller {
             return;
         }
 
+        referee.remember(uid, action, select);
+
         switch (action) {
         case 1:
             player.action1(select);
@@ -168,6 +170,7 @@ class GameController extends Controller {
 
             // 进入下一个人
             referee.enterNextPlayer(uid);
+
         } else {
             needPlayerSelect = true;
         }
@@ -175,6 +178,7 @@ class GameController extends Controller {
         const msg = room.get();
         msg.needPlayerSelect = needPlayerSelect;
         msg.canGetNobleCards = nobles;
+        msg.select = select;
 
         ctx.body = msg;
     }

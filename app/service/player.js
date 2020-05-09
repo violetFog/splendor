@@ -20,6 +20,10 @@ class Player {
         this.currencyNum = 0;
     }
 
+    checkCurrency() {
+        return this.currencyNum <= 10;
+    }
+
     action1({red = 0, blue = 0, white = 0, green = 0, black = 0}) {
         if (red !== 0) {
             this.currency.red += 1;
